@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function Logo({ light = false }: { light?: boolean }) {
+export function Logo({
+  light = false,
+  priority = false,
+}: {
+  light?: boolean;
+  priority?: boolean;
+}) {
   return (
     <Link
       href="/"
@@ -14,7 +20,7 @@ export function Logo({ light = false }: { light?: boolean }) {
           alt="NEXIS Groupe logo"
           width={180}
           height={60}
-          priority
+          priority={priority}
           className="logo-image"
         />
       </span>

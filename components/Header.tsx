@@ -33,7 +33,7 @@ export function Header() {
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <div className="container header-inner">
-        <Logo light={!scrolled && !open} />
+        <Logo light={!scrolled && !open} priority />
 
         <nav className="desktop-nav" aria-label="Navigation principale">
           <Link href="/groupe" className="nav-item">
@@ -115,7 +115,7 @@ export function Header() {
           <button
             className="menu-toggle"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Ouvrir le menu"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
           >
             {open ? <X size={22} /> : <Menu size={22} />}

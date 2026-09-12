@@ -37,6 +37,7 @@ export function TechnicalLayout({
       >
         <div className="container">
           <div
+            className="technical-intro-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -90,6 +91,7 @@ export function TechnicalLayout({
             </h3>
           </Reveal>
           <div
+            className="technical-solutions-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
@@ -138,6 +140,7 @@ export function TechnicalLayout({
       >
         <div className="container">
           <div
+            className="technical-feature-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -145,11 +148,15 @@ export function TechnicalLayout({
               alignItems: "center",
             }}
           >
-            <Reveal style={{ position: "relative", height: "500px" }}>
+            <Reveal
+              className="technical-feature-media"
+              style={{ position: "relative", height: "500px" }}
+            >
               <Image
                 src={sector.secondaryImage}
                 alt={sector.name}
                 fill
+                sizes="(max-width: 760px) calc(100vw - 32px), 50vw"
                 style={{
                   objectFit: "cover",
                   filter: "grayscale(20%) contrast(110%)",
@@ -196,6 +203,7 @@ export function TechnicalLayout({
               </p>
 
               <div
+                className="technical-commitments-grid"
                 style={{
                   marginTop: "40px",
                   display: "grid",
@@ -242,6 +250,7 @@ export function TechnicalLayout({
             </h3>
           </Reveal>
           <div
+            className="technical-process-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
@@ -301,6 +310,7 @@ export function TechnicalLayout({
             </h3>
           </Reveal>
           <div
+            className="technical-services-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",

@@ -241,6 +241,7 @@ img {
   align-items: center;
   justify-content: space-between;
   position: relative;
+  z-index: 101;
 }
 
 .desktop-nav {
@@ -323,6 +324,17 @@ img {
 
 .menu-toggle {
   display: none !important;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--bronze);
+  background: rgba(7, 26, 45, 0.72);
+  border: 1px solid rgba(216, 180, 106, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .nav-mega-trigger {
@@ -1971,12 +1983,15 @@ img {
     --container: min(100% - 48px, 1200px);
   }
   .desktop-nav,
-  .header-contact {
+  .header-contact-btn {
     display: none !important;
   }
   .menu-toggle {
-    display: block;
+    display: inline-flex !important;
     margin-left: auto;
+  }
+  .header-actions {
+    gap: 10px;
   }
   .mobile-menu {
     display: none;
@@ -1992,6 +2007,9 @@ img {
     z-index: 99;
     padding-top: 100px;
     overflow-y: auto;
+  }
+  .site-header:has(.mobile-menu.is-open) {
+    background: #071a2d;
   }
   .mobile-menu-inner {
     padding-top: 20px;
@@ -2593,6 +2611,9 @@ button,
 .page-shell {
   position: relative;
   isolation: isolate;
+  /* Keep animated/positioned page elements from extending the document
+     beyond the footer and creating a large empty scroll area. */
+  overflow: clip;
 }
 
 /* Header / navigation */
@@ -5508,3 +5529,290 @@ html[data-theme="dark"] .commitment-tag {
   }
 }
 
+/* ==========================================================================
+   Global responsive & rendering safeguards
+   ========================================================================== */
+.project-image {
+  height: 440px;
+}
+
+.project-image--large {
+  height: 520px;
+}
+
+.hero-3d-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: radial-gradient(circle, rgba(216, 180, 106, 0.08), transparent 48%);
+}
+
+.hero-3d-loading-mark {
+  color: var(--bronze);
+  font-family: Georgia, serif;
+  font-size: 24px;
+  letter-spacing: 0.18em;
+}
+
+@media (max-width: 1050px) {
+  .portal-grid,
+  .split-copy,
+  .sector-intro,
+  .why-grid,
+  .process-heading,
+  .commitment-grid,
+  .sector-cta-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-feature {
+    min-height: auto;
+    padding: 56px 36px;
+  }
+
+  .sector-group-grid,
+  .projects-grid,
+  .solution-grid,
+  .process-grid,
+  .premium-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --container: min(100% - 32px, 1320px);
+  }
+
+  body {
+    overflow-x: clip;
+  }
+
+  .corporate-overview,
+  .portal-sector-index,
+  .intro-section,
+  .why-section,
+  .projects-section,
+  .content-section,
+  .values-section,
+  .services-section,
+  .solutions-section,
+  .process-section,
+  .commitment-section,
+  .group-journey,
+  .group-ecosystem,
+  .activity-overview,
+  .portfolio-intro,
+  .contact-section {
+    padding-block: 64px;
+  }
+
+  .page-hero,
+  .page-hero--image {
+    min-height: min(520px, 78svh);
+    padding: 120px 0 54px;
+  }
+
+  .page-hero h1,
+  .contact-info h2,
+  .section-heading h2,
+  .split-copy h2,
+  .why-grid h2,
+  .sector-intro h2 {
+    font-size: clamp(36px, 11vw, 54px);
+    line-height: 1.02;
+  }
+
+  .section-heading h2,
+  .values-section .section-heading h2,
+  .projects-section .section-heading h2 {
+    white-space: normal !important;
+  }
+
+  .section-heading {
+    margin-bottom: 36px;
+  }
+
+  .portal-grid,
+  .sector-group-grid,
+  .projects-grid,
+  .activities-grid,
+  .news-grid-cards,
+  .solution-grid,
+  .process-grid,
+  .premium-grid,
+  .value-grid,
+  .ecosystem-grid,
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portal-feature,
+  .sector-group-card,
+  .glass-card,
+  .solution-card {
+    padding: 28px 22px;
+  }
+
+  .portal-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .project-image,
+  .project-card--large .project-image,
+  .project-image--large {
+    height: clamp(280px, 82vw, 360px);
+  }
+
+  .activity-card-image {
+    height: clamp(240px, 70vw, 320px) !important;
+  }
+
+  .news-featured-media,
+  .news-card-media {
+    height: clamp(230px, 68vw, 300px) !important;
+  }
+
+  .news-featured-content {
+    padding: 22px 0 0 !important;
+  }
+
+  .news-featured-content h2 {
+    font-size: clamp(25px, 8vw, 34px) !important;
+  }
+
+  .contact-layout,
+  .group-story,
+  .activity-intro,
+  .portfolio-summary,
+  .sector-intro-grid {
+    gap: 42px;
+  }
+
+  .technical-intro-grid,
+  .technical-feature-grid,
+  .technical-solutions-grid,
+  .technical-process-grid,
+  .technical-services-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 28px !important;
+  }
+
+  .technical-intro-grid h2 {
+    font-size: clamp(30px, 9vw, 40px) !important;
+  }
+
+  .technical-intro-grid p {
+    padding-left: 18px !important;
+  }
+
+  .technical-feature-media {
+    height: clamp(280px, 82vw, 380px) !important;
+  }
+
+  .technical-commitments-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .contact-detail strong,
+  .footer-contact-item,
+  .footer-contact-item a {
+    overflow-wrap: anywhere;
+  }
+
+  .footer-grid {
+    gap: 30px;
+  }
+
+  .footer-brand,
+  .footer-contact-col {
+    grid-column: auto;
+  }
+
+  .footer-bottom-right {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .service-row {
+    min-height: auto;
+    padding-block: 22px;
+  }
+
+  .service-row-inner {
+    gap: 14px;
+  }
+
+  .timeline-item {
+    padding-left: 54px;
+  }
+
+  .timeline-line {
+    left: 16px;
+  }
+
+  .timeline-node {
+    left: 9px;
+  }
+
+  .commitment-tag {
+    width: 100%;
+    padding: 11px 16px;
+  }
+
+  .hero-3d-pure-stage,
+  .hero-container-pure {
+    min-height: 620px;
+    height: min(760px, 100svh);
+  }
+
+  .hero-3d-pure-canvas-wrap,
+  .poles-3d-canvas-container {
+    min-height: 0;
+  }
+
+  .poles-3d-hud-layer {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --container: min(100% - 24px, 1320px);
+  }
+
+  .logo-capsule {
+    transform: scale(0.9);
+    transform-origin: left center;
+  }
+
+  .theme-toggle-btn {
+    margin-left: 4px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .menu-toggle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .footer-cta-text h2 {
+    font-size: 28px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

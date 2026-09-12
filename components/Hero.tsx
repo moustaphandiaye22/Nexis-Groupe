@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import {
   ArrowUpRight,
   RotateCcw,
@@ -14,9 +15,13 @@ import {
   CheckCircle2,
   Compass,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sectors } from "@/data/sectors";
-import { PolesCube } from "./3d/PolesCube";
+
+const PolesCube = dynamic(
+  () => import("./3d/PolesCube").then((module) => module.PolesCube),
+  { ssr: false },
+);
 
 const CATEGORIES = ["Tous", "Immobilier", "BTP", "Mobilité", "Services"];
 
@@ -24,6 +29,21 @@ export function Hero() {
   const [activePoleIndex, setActivePoleIndex] = useState<number | null>(null);
   const [filterGroup, setFilterGroup] = useState<string>("Tous");
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
+  const [isThreeReady, setIsThreeReady] = useState(false);
+
+  useEffect(() => {
+    const showThree = () => setIsThreeReady(true);
+    const idleApi = window as unknown as {
+      requestIdleCallback?: typeof window.requestIdleCallback;
+      cancelIdleCallback?: typeof window.cancelIdleCallback;
+    };
+    if (idleApi.requestIdleCallback) {
+      const idleId = idleApi.requestIdleCallback(showThree, { timeout: 1200 });
+      return () => idleApi.cancelIdleCallback?.(idleId);
+    }
+    const timeoutId = globalThis.setTimeout(showThree, 350);
+    return () => globalThis.clearTimeout(timeoutId);
+  }, []);
 
   const activeSector =
     activePoleIndex !== null ? sectors[activePoleIndex] : null;
@@ -103,13 +123,20 @@ export function Hero() {
 
           {/* Three.js 3D Canvas Stage */}
           <div className="hero-3d-pure-canvas-wrap">
-            <PolesCube
-              sectors={sectors}
-              activePoleIndex={activePoleIndex}
-              onSelectPole={(idx) => setActivePoleIndex(idx)}
-              filterGroup={filterGroup}
-              autoRotate={autoRotate}
-            />
+            {isThreeReady ? (
+              <PolesCube
+                sectors={sectors}
+                activePoleIndex={activePoleIndex}
+                onSelectPole={(idx) => setActivePoleIndex(idx)}
+                filterGroup={filterGroup}
+                autoRotate={autoRotate}
+              />
+            ) : (
+              <div className="hero-3d-loading" role="status">
+                <span className="hero-3d-loading-mark">NEXIS</span>
+                <span>Chargement de l’expérience 3D…</span>
+              </div>
+            )}
           </div>
 
           {/* Bottom Quick Navigation Bar (01 to 14) */}

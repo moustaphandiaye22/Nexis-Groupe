@@ -11,7 +11,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="footer sticky-footer">
+    <footer className="footer">
       <div className="container">
         {/* Compact CTA Bar */}
         <div className="footer-cta">

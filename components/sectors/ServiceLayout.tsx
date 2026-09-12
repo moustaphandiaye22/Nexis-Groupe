@@ -141,6 +141,7 @@ export function ServiceLayout({
                 src={sector.secondaryImage}
                 alt={sector.name}
                 fill
+                sizes="(max-width: 760px) calc(100vw - 32px), 50vw"
                 style={{ objectFit: "cover", opacity: 0.9 }}
               />
             </Reveal>

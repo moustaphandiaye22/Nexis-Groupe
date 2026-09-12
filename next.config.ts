@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   images: {
-    unoptimized: true,
     qualities: [75, 80, 85, 88, 90, 95, 100],
     remotePatterns: [
       {

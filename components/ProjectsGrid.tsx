@@ -14,11 +14,10 @@ export function ProjectsGrid({ limit }: { limit?: number }) {
           className={`project-card ${i % 3 === 0 ? "project-card--large" : ""}`}
         >
           <div
-            className="project-image"
+            className={`project-image ${i % 3 === 0 ? "project-image--large" : ""}`}
             style={{
               position: "relative",
               width: "100%",
-              height: i % 3 === 0 ? "520px" : "440px",
               overflow: "hidden",
             }}
           >
